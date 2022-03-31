@@ -1,0 +1,64 @@
+<p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+<div>
+     <p-splitter [style]="{'background-color':'white'}" styleClass="mb-5">
+        <ng-template pTemplate>
+                    <p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name"
+                        [sortField]="sortField" [sortOrder]="sortOrder" style="width: 106vh;" layout="list">
+                        <ng-template pTemplate="header">
+                            <div class="flex flex-column md:flex-row md:justify-content-between">
+                             <button style="float: right;background: floralwhite; color: black;" pButton pRipple type="button" label="Sort By likes" class="p-button-raised" (click)="sortbyLike()" [disabled]="disableSort"></button>
+                                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                            </div>
+                        </ng-template>
+                        <ng-template let-product pTemplate="gridItem">
+                            <div class="col-12">
+                                <div class="product-list-item">
+                                    <div class="product-list-detail">
+                                        <div style="margin-left: 31vh;" class="product-description">{{product.timestamp}}
+                                            <button style="float: right;background: dodgerblue; color: white;" pButton pRipple type="button" label="Preview" class="p-button-raised" (click)="preview(product)"></button>
+                                        </div>
+                                        <img [src]="product.Image" (click)="preview(product)">
+                                        <div style="margin-left: 3vh;" class="product-name"><i class="pi pi-heart-fill"></i>    {{product.likes}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-product pTemplate="listItem">
+                            <div class="col-12 md:col-4">
+                                <div class="product-grid-item card">
+                                    <div class="product-grid-item-content">
+                                        <div style="margin-left: 31vh;" class="product-description">{{product.timestamp}}
+                                            <button style="float: right;background: dodgerblue;color: white;" pButton pRipple type="button" label="Preview" class="p-button-raised" (click)="preview(product)"></button>
+                                        </div>
+                                        <img [src]="product.Image" style="height: 25vh; width: 50vh;margin: 2vh 49vh 1vh 1vh;" (click)="preview(product)">
+                                        <div style="margin-left: 3vh;" class="product-name"><i class="pi pi-heart-fill"></i>    {{product.likes}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-dataView>
+        </ng-template>
+        <ng-template pTemplate>
+<div class="card" style="background-color: black;">
+    <!-- <img src={{Image}} style="height: 49vh;"> -->
+
+<div *ngIf="l">
+    <img src={{Image}} style="height: 49vh;">
+    <div style="margin-left: 3vh;" class="product-name"><i class="pi pi-heart"></i>    {{likes}}</div><br>
+    <button style="background: forestgreen;color: antiquewhite;" pButton pRipple type="button" label={{btnName}} class="p-button-raised" (click)="likeCheck()"></button>
+    <div style="float: right">{{timestamp}}</div>
+</div>
+<div *ngIf="ul">
+    <img src={{Image}} style="height: 49vh;">
+    <div style="margin-left: 3vh;" class="product-name"><i class="pi pi-heart-fill"></i>    {{likes}}</div><br>
+    <button style="background: red;color: antiquewhite;" pButton pRipple type="button" label={{btnName}} class="p-button-raised" (click)="unlikeCheck()"></button>
+    <div style="float: right">{{timestamp}}</div>
+</div>
+
+    <!-- <button style="float: right;" pButton pRipple type="button" label={{btnName}} class="p-button-raised" (click)="likeCheck()"></button> -->
+    <!-- <div style="margin-left: 3vh;" class="product-name"><i class="pi pi-heart-fill"></i>    {{likes}}</div><br> -->
+<!-- <div style="float: right">{{timestamp}}</div> -->
+</div>
+        </ng-template>
+    </p-splitter>
+</div>
